@@ -1,0 +1,26 @@
+Check for django.contrib.admin.scripts.orm_script
+Check for django.contrib.auth.scripts.orm_script
+Check for django.contrib.contenttypes.scripts.orm_script
+Check for django.contrib.sessions.scripts.orm_script
+Check for django.contrib.messages.scripts.orm_script
+Check for django.contrib.staticfiles.scripts.orm_script
+Check for django_extensions.scripts.orm_script
+Check for notifications.scripts.orm_script
+Check for complex_queries.scripts.orm_script
+Found script 'complex_queries.scripts.orm_script' ...
+Check for scripts.orm_script
+Running script 'complex_queries.scripts.orm_script' ...
+a (Italian or Mexican): <QuerySet []>
+SQL: SELECT "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_restaurant" WHERE ("complex_queries_restaurant"."restaurant_type" = IT OR "complex_queries_restaurant"."restaurant_type" = MX)
+b (Not recently opened): <QuerySet []>
+SQL: SELECT "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_restaurant" WHERE NOT ("complex_queries_restaurant"."date_opened" >= 2025-08-29)
+c (Italian/Mexican or recent): <QuerySet []>
+SQL: SELECT "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_restaurant" WHERE ("complex_queries_restaurant"."restaurant_type" = IT OR "complex_queries_restaurant"."restaurant_type" = MX OR "complex_queries_restaurant"."date_opened" >= 2025-08-29)
+d (Name contains grill): <QuerySet []>
+SQL: SELECT "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_restaurant" WHERE "complex_queries_restaurant"."name" LIKE %grill% ESCAPE '\'
+e (Name ends with Cafe): <QuerySet []>
+SQL: SELECT "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_restaurant" WHERE "complex_queries_restaurant"."name" LIKE %Cafe ESCAPE '\'
+f (Name has digits): <QuerySet []>
+SQL: SELECT "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_restaurant" WHERE "complex_queries_restaurant"."name" REGEXP \d+
+g (Profitable sales or digit in restaurant name): <QuerySet []>
+SQL: SELECT "complex_queries_sale"."id", "complex_queries_sale"."restaurant_id", "complex_queries_sale"."income", "complex_queries_sale"."expenditure", "complex_queries_restaurant"."id", "complex_queries_restaurant"."name", "complex_queries_restaurant"."restaurant_type", "complex_queries_restaurant"."date_opened" FROM "complex_queries_sale" INNER JOIN "complex_queries_restaurant" ON ("complex_queries_sale"."restaurant_id" = "complex_queries_restaurant"."id") WHERE ("complex_queries_sale"."income" > ("complex_queries_sale"."expenditure") OR "complex_queries_restaurant"."name" REGEXP \d+)
